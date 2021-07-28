@@ -10,6 +10,10 @@ function ListItem({rooms}) {
     const service = useContext(PrefContext);
     const [state, send] = useService(service);
 
+    if (state.context.totalHits >= 10 && (state.context.poolHits / state.context.totalHits) >= 0.4) {
+        rooms.sort((x,y) => y.pool - x.pool)
+    }
+
     return (
         <VStack
             divider={<StackDivider />}
@@ -21,6 +25,7 @@ function ListItem({rooms}) {
             maxW={{ base: '90vw', sm: '80vw', lg: '65vw', xl: '50vw' }}
             alignItems='stretch'
         >
+
             {rooms.map(room => (
                 <form onClick={() => send('HIT', {hitId: room.id, poolHit: room.pool})} >
                     <HStack key={room.id}>

@@ -1,4 +1,4 @@
-import { Heading, VStack, IconButton, useColorMode, HStack, Spacer, Stack, AlertIcon, Alert } from '@chakra-ui/react'
+import { Heading, VStack, IconButton, useColorMode, HStack, Spacer, Stack, useToast } from '@chakra-ui/react'
 import { FaSun, FaMoon, FaHome, FaBackspace } from 'react-icons/fa'
 import ListItem from './components/ListItem'
 import UserPrefs from './components/UserPrefs'
@@ -96,16 +96,13 @@ function App() {
       reviews: '62'
     }];
 
+  const toast = useToast()
   const { colorMode, toggleColorMode } = useColorMode();
   const [state, send, service] = useMachine(selectPrefsMachine);
 
   return (
     <Stack>
-      {state.context.totalHits >= 10 && (state.context.poolHits / state.context.totalHits) >= 0.4 && 
-      <Alert status="info">
-        <AlertIcon />
-        Hey, Du schaust dir recht oft Unterkünfte mit Pool an! Ich habe sie für dich nach vorne sortiert :)
-      </Alert>}
+
 
       <VStack p={4}>
         <HStack w="98%" alignItems="stretch">
@@ -126,6 +123,14 @@ function App() {
         </PrefContext.Provider>
 
       </VStack>
+      {state.context.totalHits >= 10 && (state.context.poolHits / state.context.totalHits) >= 0.4 && state.matches('listRooms') &&
+      toast({
+        title: "Hey, Du schaust dir recht oft Unterkünfte mit Pool an!",
+        description: "Ich habe die List für dich neu sortiert :)",
+        status: "info",
+        duration: 5000,
+        isClosable: true,
+      })}
     </Stack>
 
   );
