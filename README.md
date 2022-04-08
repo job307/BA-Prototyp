@@ -1,1 +1,3 @@
 # BA-Prototyp
+
+Ziel dieser Arbeit ist es, den Prototyp einer Webapplikation für ein Buchungsportal zu erstellen, ähnlich des Marktführers Booking.com oder Airbnb, Inc. (airbnb.com). Doch neben den üblichen Suchfunktionen (Auswahl Zielort, Beginn und Ende der Reise sowie Anzahl der Reisenden) soll der Prototyp erkennen, welche Kriterien an einer Unterkunft dem Nutzer wichtig sind, ohne diese speziell abzufragen. Zum Erlernen der nutzerspezifischen Kriterien soll die Webapplikation Vorgänge in States unterteilen, um das Nutzerverhalten besser zu verstehen und Präferenzen zu erlernen. Dazu muss eine State Machine mithilfe von XState entwickelt werden. Zu den Präferenzen werden Konfidenzen errechnet, anhand derer die Ergebnisliste sortiert wird.
